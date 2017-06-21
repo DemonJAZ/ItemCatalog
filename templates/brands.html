@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      {% if 'email' in session %}
+        <br>
+        <a href="/brands/new" class="btn btn-success" role="button">Add New Brand</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <br>
+      <div class="list-group">
+        {% for brand in brands %}
+          <a href="/brands/{{ brand.id }}" class="list-group-item">{{brand.name}}
+            {% if 'email' in session %}
+              {% if session['user_id'] == brand.user_id %}
+                <a href="/brands/{{ brand.id }}/delete" class="btn btn-danger" role="button">Delete Brand</a>
+                <a href="/brands/{{ brand.id }}/edit" class="btn btn-default" role="button">Edit Brand</a>
+              {% endif %}
+            {% endif %}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

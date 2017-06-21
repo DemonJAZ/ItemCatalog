@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <h2 style="color:blue;">Enter The new Name of Brand</h2>
+    <form class="" method="post">
+      <label>Name:</label>
+      <input type="text" name="name" class="form-group" value="{{edit_Brand.name}}">
+      <button type="submit" class="btn btn-default">Submit</button>
+      <a href="/" role="button" class="btn btn-danger">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

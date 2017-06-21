@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>SoccerFeet Brands</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <header class="row" id="myheader">
+        <div class="col-md-4">
+          <a href="/" style="text-decoration:none; color:white;"><h1>SoccerFeet</h1></a>
+        </div>
+        <div class="col-md-offset-4 col-md-4 text-right">
+          <br>
+          {% if 'email' not in session %}
+            <a href="/login" role="button" class="btn btn-default">Login</a>
+          {% else %}
+            <a href="/gdisconnect" role="button" class="btn btn-default">Logout</a>
+          {% endif %}
+        </div>
+      </header>
+      <div class = 'flash'>
+      		{% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul>
+              {% for message in messages %}
+                  <li> <strong> {{ message }} </strong> </li>
+              {% endfor %}
+              </ul>
+              {% endif %}
+          {% endwith %}
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <img class="img-responsive" id="banner" src="{{ url_for('static', filename='Images/Banner.jpg')}}" alt="Welcome To Soccer World">
+        </div>
+      </div>
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

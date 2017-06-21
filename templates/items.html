@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% block content %}
+{% if 'email' in session %}
+  {% if brand.user_id == session['user_id'] %}
+  <div class="row">
+    <div class="col-md-12">
+        <br>
+        <a href="/brands/{{brand.id}}/items/new" class="btn btn-success" role="button">Add New Item</a>
+    </div>
+  </div>
+  {% endif %}
+{% endif %}
+  {% for item in items %}
+    <div class="row" id="item">
+      <h2 style="padding-left:20px;">{{item.name}}</h2>
+      <div class="col-md-4">
+        <img class="img-responsive" src="{{ item.image }}" alt="Shoe image">
+      </div>
+      <div class="col-md-4">
+        <p>{{item.description}}</p>
+      </div>
+      <div class="col-md-1">
+        <p>{{item.price}}</p>
+      </div>
+      {% if 'email' in session %}
+      {% if brand.user_id == session['user_id'] %}
+      <div class="col-md-3">
+        <a href="/brands/{{brand.id}}/items/{{item.id}}/edit" role="button" class="btn btn-success">Edit</a>
+        <a href="/brands/{{brand.id}}/items/{{item.id}}/delete" role="button" class="btn btn-danger">Delete</a>
+      </div>
+      {% endif %}
+      {% endif %}
+    </div>
+    <br>
+  {% endfor %}
+{% endblock %}
