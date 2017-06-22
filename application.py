@@ -85,15 +85,19 @@ def deleteBrand(brand_id):
     if 'username' not in login_session:
         return redirect('/login')
     deleteBrand = session.query(Brands).filter_by(id=brand_id).one()
-
     # Authorization check
     if deleteBrand.user_id != login_session['user_id']:
         flash('Not Authorized')
         return redirect('/?error=not_authorized')
 
+    deleteItems = session.query(Items).filter_by(brand_id=deleteBrand.id)
+    for item in deleteItems:
+        print item.name
+        session.delete(item)
+        session.commit()
     session.delete(deleteBrand)
-    flash('%s Successfully Deleted' % deleteBrand.name)
     session.commit()
+    flash('%s Successfully Deleted' % deleteBrand.name)
     return redirect(url_for('displayBrands'))
 
 
