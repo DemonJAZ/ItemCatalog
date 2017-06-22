@@ -92,7 +92,6 @@ def deleteBrand(brand_id):
 
     deleteItems = session.query(Items).filter_by(brand_id=deleteBrand.id)
     for item in deleteItems:
-        print item.name
         session.delete(item)
         session.commit()
     session.delete(deleteBrand)
